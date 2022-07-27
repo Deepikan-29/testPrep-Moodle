@@ -13,16 +13,14 @@ variables:
   phpVersion: 7.2
 
 
-steps:
-
--jobs:  
+jobs:  
    
-    deployment: VMDeploy
-    displayName: web
-    environment:
-      name:  TestPrep
-      resourceType: VirtualMachine
-      tags: web
+- deployment: VMDeploy
+  displayName: web
+  environment:
+    name:  TestPrep
+    resourceType: VirtualMachine
+    tags: web
 
 script:
       sudo update-alternatives --set php /usr/bin/php$(phpVersion)
@@ -34,5 +32,5 @@ script:
     
 
 
-script: composer install --no-interaction --prefer-dist
+- script: composer install --no-interaction --prefer-dist
     displayName: 'composer install'
