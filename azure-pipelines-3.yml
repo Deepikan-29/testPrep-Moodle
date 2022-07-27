@@ -34,5 +34,5 @@ script:
     
 
 
-  - script: composer install --no-interaction --prefer-dist
+script: composer install --no-interaction --prefer-dist
     displayName: 'composer install'
