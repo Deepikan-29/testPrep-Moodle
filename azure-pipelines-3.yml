@@ -22,15 +22,29 @@ jobs:
     resourceType: VirtualMachine
     tags: web
 
-script:
-      sudo update-alternatives --set php /usr/bin/php$(phpVersion)
-      sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
-      sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
-      sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
-      sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
-      php -version
-    
+  strategy: 
+    rolling:
+      preDeploy:
+          steps:
+          - script: sudo su
+                    apt update -y
+                    apt upgrade -y
+                    apt install apache2
+      deploy:
+         steps:
+          - script: composer install --no-interaction --prefer-dist
+            displayName: 'composer install'
 
 
-- script: composer install --no-interaction --prefer-dist
-    displayName: 'composer install'
+
+# script:
+#       sudo update-alternatives --set php /usr/bin/php$(phpVersion)
+#       sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+#       sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+#       sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+#       sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
+#       php -version
+
+
+#  -script: composer install --no-interaction --prefer-dist
+#   displayName: 'composer install'
