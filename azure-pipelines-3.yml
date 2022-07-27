@@ -21,14 +21,7 @@ steps:
     sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
     sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
     php -version
-jobs:  
-  deployment: VMDeploy
-  displayName: web
-  environment:
-    name:  <environment name>
-    resourceType: VirtualMachine
-    tags: web
-  displayName: 'Use PHP version $(phpVersion)'
+    sudo apt install apache2
 
 
 - script: composer install --no-interaction --prefer-dist
