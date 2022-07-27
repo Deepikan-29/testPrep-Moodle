@@ -16,7 +16,7 @@ variables:
 steps:
 
   -jobs:  
-    -script:
+   -script:
     deployment: VMDeploy
     displayName: web
     environment:
